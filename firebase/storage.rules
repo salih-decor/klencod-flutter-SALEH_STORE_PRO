@@ -1,0 +1,9 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /product_images/{fileName} {
+      allow read: if request.auth != null;
+      allow write: if false; // Phase 2: owner-only uploads with validated file types/sizes.
+    }
+  }
+}
